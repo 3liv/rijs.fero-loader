@@ -1,5 +1,4 @@
  const fero = require('fero')
-  , fn = require('utilise/fn')
   , by = require('utilise/by')
   , key = require('utilise/key')
   , push = require('utilise/push')
@@ -7,6 +6,7 @@
   , debounce = require('utilise/debounce')
   , discover = require('fero/discovery/multicast')
   , log = require('utilise/log')('rijs/fero-loader')
+  , fn = b => (new Function('module', 'exports', 'require', 'process', `module.exports = ${b}`))
 
 module.exports = async function loader(ripple){
   log('creating')
