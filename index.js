@@ -6,7 +6,8 @@
   , debounce = require('utilise/debounce')
   , discover = require('fero/discovery/multicast')
   , log = require('utilise/log')('rijs/fero-loader')
-  , fn = b => (new Function('module', 'exports', 'require', 'process', `module.exports = ${b}`))
+  , fn = b => (new Function('module', 'exports', 
+                            'require', 'process', `module.exports = ${b}`))
 
 module.exports = async function loader(ripple){
   log('creating')
@@ -18,11 +19,12 @@ module.exports = async function loader(ripple){
   udp
     .on('list')
     .filter(([name]) => !registered.includes(name))
-    .map(([name]) => push(name)(registered))
     .map(async ([name]) => {
+      push(name)(registered)
+
       const comps = await fero(name, { client: true } )
       await comps.once('connected')
-     
+    
       const data = await comps.peers.send({
        type: 'SUBSCRIBE', 
        value: {}
@@ -30,11 +32,11 @@ module.exports = async function loader(ripple){
 
       data.value
         .filter(by(key('headers.content-type'), 'application/javascript'))
-        .map(log)
         .map(key('body', fn))
 
-      return data.value
-     })
-    .map(async d => log(await d))
-    .map(ripple)
+     return data.value
+    })
+    .map(async d => {
+      ripple(log(await d))
+    })
 }
