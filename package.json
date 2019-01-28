@@ -7,9 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Ali Versi (https://github.com/3liv)",
+  "license": "https://3liv.mit-license.org",
   "dependencies": {
-    "fero": "^1.7.1"
+    "fero": "^1.7.1",
+    "utilise": "^2.3.8"
   }
 }
