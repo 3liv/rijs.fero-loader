@@ -94,4 +94,6 @@ module.exports = async function loader(ripple){
     .map(async d => {
       ripple(log(await d))
     })
+
+  return ripple
 }
