@@ -2,7 +2,7 @@
   , by = require('utilise/by')
   , fn = require('utilise/fn')
   , key = require('utilise/key')
-  , deb = require('utilise/deb')('rproxy')
+  , deb = require('utilise/deb')('[rijs.fero-loader/rproxy]')
   , push = require('utilise/push')
   , slice = require('utilise/slice')
   , connect = require('fero/connect')
